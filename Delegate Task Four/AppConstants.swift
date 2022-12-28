@@ -13,7 +13,8 @@ struct AppConstants {
             static let segueIdentifier = "goToConfiguration"
         }
         struct Cells {
-            static let collectionView = "myCollectionViewCell"
+            static let collectionView = "settingsCollectionViewCell"
+            static let tableView = "settingsTableViewCell"
         }
     }
 }
