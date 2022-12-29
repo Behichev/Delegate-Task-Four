@@ -6,16 +6,13 @@
 //
 
 import UIKit
-protocol StateViewControllerDelegate {
-    func segmentedControlDidChange(control state: Int)
-}
+
 class StateViewController: UIViewController {
     
     @IBOutlet weak private var stateTextView: UITextView!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak private var uiStyleSegmentedControl: UISegmentedControl!
     
-    var delegate: StateViewControllerDelegate?
     
     private var bunchOfSwitchStates: [Bool] = []
     
@@ -24,7 +21,6 @@ class StateViewController: UIViewController {
         for _ in 0...9 {
             bunchOfSwitchStates.append(false)
         }
-        delegate?.segmentedControlDidChange(control: uiStyleSegmentedControl.selectedSegmentIndex)
     }
     
     @IBAction private func goButtonPressed(_ sender: UIButton) {
@@ -38,6 +34,7 @@ class StateViewController: UIViewController {
                 if let text = stateLabel.text {
                     let configuration = SettingsViewControllerConfiguration(bunchOfSwiftStates: bunchOfSwitchStates,textForTexfield: text)
                     secondScreen.configure(with: configuration)
+                    secondScreen.selectedIndex = uiStyleSegmentedControl.selectedSegmentIndex
                 }
             }
         }

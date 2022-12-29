@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     private var items: [ItemState] = []
     private var cellTitle = ""
     private var cellColor: UIColor = .red
+    var selectedIndex: Int? 
     
     //MARK: - ViewController Lifecycle
     
@@ -40,6 +41,14 @@ class SettingsViewController: UIViewController {
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
         settingsTextField.text = configuration?.textForTexfield
+        
+        if let selectedIndex {
+            if selectedIndex == 0 {
+                superViewCollection.isHidden = true
+            } else {
+                superTableView.isHidden = true
+            }
+        }
     }
     
     func configure(with configuration: SettingsViewControllerConfiguration) {
@@ -65,7 +74,6 @@ class SettingsViewController: UIViewController {
 //MARK: - UICollectionViewDelegate
 
 extension SettingsViewController: UICollectionViewDelegate {
-    
 }
 
 //MARK: - UICollectionViewDataSource
@@ -157,13 +165,4 @@ extension SettingsViewController: SwitchStatmentDelegate {
         configuration?.bunchOfSwiftStates[index] = switchState
         delegate?.switchStateDidChange(state: switchState, index: index)
     }
-}
-
-extension SettingsViewController: StateViewControllerDelegate {
-    func segmentedControlDidChange(control state: Int) {
-        if state == 0 {
-            superViewCollection.isHidden = true
-        }
-    }
-
 }
