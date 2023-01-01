@@ -16,8 +16,8 @@ class SettingsViewController: UIViewController {
     
     //MARK: - Outlets
     
-    @IBOutlet weak private var superViewCollection: UIView!
-    @IBOutlet weak private var superTableView: UIView!
+    @IBOutlet weak private var superViewForCollection: UIView!
+    @IBOutlet weak private var superViewForTableView: UIView!
     @IBOutlet weak private var settingsTextField: UITextField!
     @IBOutlet weak private var settingsTableView: UITableView!
     @IBOutlet weak private var settingsCollectionView: UICollectionView!
@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
     private var items: [ItemState] = []
     private var cellTitle = ""
     private var cellColor: UIColor = .red
-    var selectedIndex: Int? 
+    var selectedIndex: Int?
     
     //MARK: - ViewController Lifecycle
     
@@ -41,13 +41,8 @@ class SettingsViewController: UIViewController {
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
         settingsTextField.text = configuration?.textForTexfield
-        
         if let selectedIndex {
-            if selectedIndex == 0 {
-                superViewCollection.isHidden = true
-            } else {
-                superTableView.isHidden = true
-            }
+            setupUI(selectedIndex: selectedIndex)
         }
     }
     
@@ -64,6 +59,20 @@ class SettingsViewController: UIViewController {
         })
         items = configureItemsArray
     }
+    
+    private func setupUI(selectedIndex: Int) {
+        superViewForTableView.isHidden = true
+        superViewForCollection.isHidden = true
+        
+        if selectedIndex == 0 {
+            superViewForTableView.isHidden = false
+        } else if selectedIndex == 1 {
+            superViewForCollection.isHidden = false
+        } else {
+            
+        }
+    }
+    
     //MARK: - Actions
     
     @IBAction private func backButtonPressed(_ sender: UIButton) {

@@ -9,12 +9,17 @@ import UIKit
 
 class StateViewController: UIViewController {
     
+    //MARK: - Outlets
+    
     @IBOutlet weak private var stateTextView: UITextView!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak private var uiStyleSegmentedControl: UISegmentedControl!
     
+    //MARK: - Variables
     
     private var bunchOfSwitchStates: [Bool] = []
+    
+    //MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +28,13 @@ class StateViewController: UIViewController {
         }
     }
     
+    //MARK: - Actions
+    
     @IBAction private func goButtonPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: AppConstants.Identifieers.Segues.segueIdentifier, sender: self)
     }
+    
+    //MARK: - Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == AppConstants.Identifieers.Segues.segueIdentifier {
@@ -40,6 +49,8 @@ class StateViewController: UIViewController {
         }
     }
 }
+
+//MARK: - SettingsViewControllerDelegate
 
 extension StateViewController: SettingsViewControllerDelegate {
     func sendMessageToLabel(message: String) {

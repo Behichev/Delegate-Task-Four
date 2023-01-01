@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,11 +12,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="StateViewController" customModule="Delegate_Task_Four" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="URZ-5G-zmX">
-                                <rect key="frame" x="159" y="751" width="75" height="35"/>
+                                <rect key="frame" x="159" y="533" width="282" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="GO"/>
                                 <connections>
@@ -25,7 +24,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D7H-RX-xEp">
-                                <rect key="frame" x="16" y="140.66666666666666" width="361" height="32"/>
+                                <rect key="frame" x="16" y="81.666666666666671" width="568" height="32"/>
                                 <segments>
                                     <segment title="TableView"/>
                                     <segment title="CollectionView"/>
@@ -33,7 +32,7 @@
                                 </segments>
                             </segmentedControl>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKr-KK-ZbF">
-                                <rect key="frame" x="16" y="187.66666666666669" width="361" height="547.33333333333326"/>
+                                <rect key="frame" x="16" y="128.66666666666666" width="568" height="388.33333333333337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -41,7 +40,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiR-uf-4Q2">
-                                <rect key="frame" x="16" y="91" width="361" height="33.666666666666657"/>
+                                <rect key="frame" x="16" y="32" width="568" height="33.666666666666657"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -81,11 +80,11 @@
             <objects>
                 <viewController id="Ogn-fe-Uqt" customClass="SettingsViewController" customModule="Delegate_Task_Four" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KF2-QL-erb">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kL4-pX-smD">
-                                <rect key="frame" x="158" y="716" width="77" height="35"/>
+                                <rect key="frame" x="158" y="513" width="284" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="BACK"/>
                                 <connections>
@@ -93,10 +92,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mB2-57-2EB" userLabel="Super Table View">
-                                <rect key="frame" x="0.0" y="157" width="393" height="527"/>
+                                <rect key="frame" x="0.0" y="98" width="600" height="383"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UK9-Gv-OkP">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="527"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="383"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                 </subviews>
@@ -109,10 +108,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVj-AY-oX2">
-                                <rect key="frame" x="0.0" y="157" width="393" height="527"/>
+                                <rect key="frame" x="0.0" y="98" width="600" height="383"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XJe-O3-OUc">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="527"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="383"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="69M-Uk-Yek">
                                             <size key="itemSize" width="393" height="128"/>
@@ -132,7 +131,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bac-xo-nSG">
-                                <rect key="frame" x="16" y="91" width="361" height="34"/>
+                                <rect key="frame" x="16" y="32" width="568" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -160,8 +159,8 @@
                         <outlet property="settingsCollectionView" destination="XJe-O3-OUc" id="xc7-zR-2UL"/>
                         <outlet property="settingsTableView" destination="UK9-Gv-OkP" id="znI-wd-Lfu"/>
                         <outlet property="settingsTextField" destination="bac-xo-nSG" id="ZmC-aJ-Jpr"/>
-                        <outlet property="superTableView" destination="mB2-57-2EB" id="RA6-bR-Uez"/>
-                        <outlet property="superViewCollection" destination="bVj-AY-oX2" id="m7Q-aX-wYD"/>
+                        <outlet property="superViewForCollection" destination="bVj-AY-oX2" id="m7Q-aX-wYD"/>
+                        <outlet property="superViewForTableView" destination="mB2-57-2EB" id="RA6-bR-Uez"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DLN-g0-xAl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
