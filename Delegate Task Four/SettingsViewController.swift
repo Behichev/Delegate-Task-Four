@@ -16,11 +16,13 @@ class SettingsViewController: UIViewController {
     
     //MARK: - Outlets
     
+    @IBOutlet weak private var superViewForStackView: UIView!
     @IBOutlet weak private var superViewForCollection: UIView!
     @IBOutlet weak private var superViewForTableView: UIView!
     @IBOutlet weak private var settingsTextField: UITextField!
     @IBOutlet weak private var settingsTableView: UITableView!
     @IBOutlet weak private var settingsCollectionView: UICollectionView!
+    @IBOutlet weak private var settingsStackView: UIStackView!
     
     var delegate: SettingsViewControllerDelegate?
     
@@ -44,6 +46,7 @@ class SettingsViewController: UIViewController {
         if let selectedIndex {
             setupUI(selectedIndex: selectedIndex)
         }
+        settingsStackView.addSubview(<#T##view: UIView##UIView#>)
     }
     
     func configure(with configuration: SettingsViewControllerConfiguration) {
@@ -63,13 +66,14 @@ class SettingsViewController: UIViewController {
     private func setupUI(selectedIndex: Int) {
         superViewForTableView.isHidden = true
         superViewForCollection.isHidden = true
+        superViewForStackView.isHidden = true
         
         if selectedIndex == 0 {
             superViewForTableView.isHidden = false
         } else if selectedIndex == 1 {
             superViewForCollection.isHidden = false
         } else {
-            
+            superViewForStackView.isHidden = false
         }
     }
     
