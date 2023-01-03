@@ -47,9 +47,11 @@ class SettingsViewController: UIViewController {
             setupUI(selectedIndex: selectedIndex)
         }
         for item in items {
-            var view = SettingsView()
+            let view = SettingsView()
+            let testView = view.loadViewFromNib()
+            settingsStackView.addArrangedSubview(testView)
             view.configure(with: item)
-            settingsStackView.addSubview(view)
+            view.delegate = self
         }
     }
     
