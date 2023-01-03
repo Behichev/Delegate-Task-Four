@@ -23,7 +23,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak private var settingsTableView: UITableView!
     @IBOutlet weak private var settingsCollectionView: UICollectionView!
     @IBOutlet weak private var settingsStackView: UIStackView!
-    
+        
     var delegate: SettingsViewControllerDelegate?
     
     private var configuration: SettingsViewControllerConfiguration?
@@ -46,7 +46,11 @@ class SettingsViewController: UIViewController {
         if let selectedIndex {
             setupUI(selectedIndex: selectedIndex)
         }
-        settingsStackView.addSubview(<#T##view: UIView##UIView#>)
+        for item in items {
+            var view = SettingsView()
+            view.configure(with: item)
+            settingsStackView.addSubview(view)
+        }
     }
     
     func configure(with configuration: SettingsViewControllerConfiguration) {
