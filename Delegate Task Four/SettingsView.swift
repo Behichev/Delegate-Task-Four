@@ -15,15 +15,7 @@ class SettingsView: UIView {
     private var cellIndex: Int?
     
     var delegate: SwitchStatmentDelegate?
-    
-    
-    func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: SettingsView.self)
-        let nib = UINib(nibName: "SettingsView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-    
+
     func configure(with item: ItemState) {
         settingsSwitch.setOn(item.state, animated: true)
         cellIndex = item.id

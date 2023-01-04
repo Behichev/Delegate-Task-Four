@@ -23,7 +23,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak private var settingsTableView: UITableView!
     @IBOutlet weak private var settingsCollectionView: UICollectionView!
     @IBOutlet weak private var settingsStackView: UIStackView!
-        
+    
     var delegate: SettingsViewControllerDelegate?
     
     private var configuration: SettingsViewControllerConfiguration?
@@ -31,6 +31,7 @@ class SettingsViewController: UIViewController {
     private var cellTitle = ""
     private var cellColor: UIColor = .red
     var selectedIndex: Int?
+    private var myView: SettingsView?
     
     //MARK: - ViewController Lifecycle
     
@@ -47,11 +48,11 @@ class SettingsViewController: UIViewController {
             setupUI(selectedIndex: selectedIndex)
         }
         for item in items {
-            let view = SettingsView()
-            let testView = view.loadViewFromNib()
-            settingsStackView.addArrangedSubview(testView)
-            view.configure(with: item)
-            view.delegate = self
+            if let myView = UINib.init(nibName: "SettingsView", bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
+                settingsStackView.addArrangedSubview(myView)
+                myView.configure(with: item)
+                myView.delegate = self
+            }
         }
     }
     
