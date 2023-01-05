@@ -13,7 +13,7 @@ protocol SwitchStatmentDelegate {
 
 class SettingsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var switchStateLabel: UILabel!
+    @IBOutlet weak private var switchStateLabel: UILabel!
     @IBOutlet weak private var settingSwitch: UISwitch!
     
     var delegate: SwitchStatmentDelegate?
