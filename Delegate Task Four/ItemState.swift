@@ -9,7 +9,7 @@ import UIKit
 
 struct ItemState {
     let id: Int
-    var state: Bool
+    let state: Bool
     let cellTitle: String
     let cellBackgroundColor: UIColor
 }

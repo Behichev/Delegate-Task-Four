@@ -187,7 +187,6 @@ extension SettingsViewController: UITableViewDelegate {
 
 extension SettingsViewController: SwitchStatmentDelegate {
     func changeSwitchState(index: Int, switchState: Bool) {
-        items[index].state = switchState
         configuration?.bunchOfSwiftStates[index] = switchState
         delegate?.switchStateDidChange(state: switchState, index: index)
     }
