@@ -5,11 +5,10 @@
 //  Created by Ivan Behichev on 28.12.2022.
 //
 
-import UIKit
+import Foundation
 
 struct ItemState {
     let id: Int
     let state: Bool
     let cellTitle: String
-    let cellBackgroundColor: UIColor
 }

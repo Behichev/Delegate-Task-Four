@@ -8,7 +8,7 @@
 import Foundation
 
 struct SettingsViewControllerConfiguration {
-    var bunchOfSwiftStates: [Bool]
-    var textForTexfield: String
-    var selectedIndex: Int
+    let bunchOfSwiftStates: [Bool]
+    let textForTexfield: String
+    let selectedIndex: Int
 }

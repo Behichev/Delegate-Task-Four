@@ -80,10 +80,10 @@
 				230DED07295A383C001F4D84 /* StateViewController.swift */,
 				23567CB3295B8D3C00F6C3D4 /* SettingsViewController.swift */,
 				23CE17DB295CDCB400CF261F /* SettingsCollectionViewCell.swift */,
-				23CE17DF295CEA6F00CF261F /* ItemState.swift */,
+				23CE17E3295CEF0700CF261F /* SettingsTableViewCell.swift */,
 				23CE17E1295CEB7400CF261F /* SettingsViewControllerConfiguration.swift */,
 				23BB19DE2964C86F00BCF586 /* SettingsView.swift */,
-				23CE17E3295CEF0700CF261F /* SettingsTableViewCell.swift */,
+				23A94B0029677E450053C63F /* Model */,
 				23567CB5295B8D6100F6C3D4 /* AppConstants.swift */,
 				23567CB9295BB50300F6C3D4 /* View */,
 				230DED11295A383E001F4D84 /* Info.plist */,
@@ -119,6 +119,14 @@
 				23CE17DC295CDCB400CF261F /* SettingsCollectionViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		23A94B0029677E450053C63F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				23CE17DF295CEA6F00CF261F /* ItemState.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -26,36 +26,46 @@ class SettingsViewController: UIViewController {
     
     var delegate: SettingsViewControllerDelegate?
     
-    private var configuration: SettingsViewControllerConfiguration?
+    //MARK: - Variables
+    
     private var items: [ItemState] = []
     private var cellTitle = ""
-    private var cellColor: UIColor = .red
     private var myView: SettingsView?
+    private var firstScreenArrayOfStates: [Bool] = []
+    private var selectedIndex: Int?
+    private var textForTexfield: String?
     
     //MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsTextField.delegate = self
-        settingsTextField.text = configuration?.textForTexfield
-        
-        if let selectedIndex = configuration?.selectedIndex {
+        items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
+        if let selectedIndex, let textForTexfield {
             setupUI(selectedIndex: selectedIndex)
+            settingsTextField.text = textForTexfield
         }
     }
     
+    //MARK: - Functions
+    
     func configure(with configuration: SettingsViewControllerConfiguration) {
-        self.configuration = configuration
-        let configureItemsArray = configuration.bunchOfSwiftStates.enumerated().map ({ (index, element) in
+        firstScreenArrayOfStates = configuration.bunchOfSwiftStates
+        selectedIndex = configuration.selectedIndex
+        textForTexfield = configuration.textForTexfield
+    }
+    
+    private func transformStateArrayToStruct(array: [Bool]) -> [ItemState] {
+        
+        let transformedArray = array.enumerated().map ({ (index, element) in
             if element {
-                cellColor = .green
                 cellTitle = "ON"
             } else {
                 cellTitle = "OFF"
             }
-            return ItemState(id: index, state: element, cellTitle: cellTitle, cellBackgroundColor: cellColor)
+            return ItemState(id: index, state: element, cellTitle: cellTitle)
         })
-        items = configureItemsArray
+        return transformedArray
     }
     
     private func setupUI(selectedIndex: Int) {
@@ -64,27 +74,29 @@ class SettingsViewController: UIViewController {
         superViewForStackView.isHidden = true
         
         switch selectedIndex {
-        
+            
         case 0:
             superViewForTableView.isHidden = false
             settingsTableView.delegate = self
             settingsTableView.dataSource = self
-        
+            
         case 1:
             superViewForCollection.isHidden = false
-            settingsCollectionView.delegate = self
             settingsCollectionView.dataSource = self
+            settingsCollectionView.delegate = self
             settingsCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        
+            
         case 2:
+            superViewForStackView.isHidden = false
             for item in items {
                 if let myView = UINib.init(nibName: "SettingsView", bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
                     settingsStackView.addArrangedSubview(myView)
                     myView.configure(with: item)
                     myView.delegate = self
+                    
                 }
             }
-            superViewForStackView.isHidden = false
+            
         default:
             break
         }
@@ -95,11 +107,6 @@ class SettingsViewController: UIViewController {
     @IBAction private func backButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
-}
-
-//MARK: - UICollectionViewDelegate
-
-extension SettingsViewController: UICollectionViewDelegate {
 }
 
 //MARK: - UICollectionViewDataSource
@@ -180,14 +187,14 @@ extension SettingsViewController: UITableViewDataSource {
 //MARK: - UITableViewDelegate
 
 extension SettingsViewController: UITableViewDelegate {
-    
 }
 
 //MARK: - SwitchStatmentDelegate
 
 extension SettingsViewController: SwitchStatmentDelegate {
     func changeSwitchState(index: Int, switchState: Bool) {
-        configuration?.bunchOfSwiftStates[index] = switchState
+        firstScreenArrayOfStates[index] = switchState
+        items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
         delegate?.switchStateDidChange(state: switchState, index: index)
     }
 }

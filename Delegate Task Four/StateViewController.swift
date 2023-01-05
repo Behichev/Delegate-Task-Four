@@ -23,9 +23,21 @@ class StateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for _ in 0...99 {
+        for _ in 0...15 {
             bunchOfSwitchStates.append(false)
         }
+        setupTextViewContent()
+    }
+    
+    //MARK: - Functions
+    
+    private func setupTextViewContent() {
+        var textElement = ""
+        for (index, element) in bunchOfSwitchStates.enumerated() {
+            let textValue = element ? "ON" : "OFF"
+            textElement += "\(index): \(textValue)\n"
+        }
+        stateTextView.text = textElement
     }
     
     //MARK: - Actions
@@ -57,13 +69,7 @@ extension StateViewController: SettingsViewControllerDelegate {
     }
     
     func switchStateDidChange(state: Bool, index: Int) {
-        var textElement = ""
         bunchOfSwitchStates[index] = state
-        
-        for (index, element) in bunchOfSwitchStates.enumerated() {
-            let textValue = element ? "ON" : "OFF"
-            textElement += "\(index): \(textValue)\n"
-        }
-        stateTextView.text = textElement
+        setupTextViewContent()
     }
 }
