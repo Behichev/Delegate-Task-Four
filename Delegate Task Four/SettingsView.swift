@@ -9,22 +9,27 @@ import UIKit
 
 class SettingsView: UIView {
 
-    @IBOutlet weak private var settingsSwitch: UISwitch!
-    @IBOutlet weak private var stateLabel: UILabel!
+    @IBOutlet weak private var settingSwitch: UISwitch!
+    @IBOutlet weak private var switchStateLabel: UILabel!
     
     private var cellIndex: Int?
     
     var delegate: SwitchStatmentDelegate?
 
     func configure(with item: ItemState) {
-        settingsSwitch.setOn(item.state, animated: true)
+        settingSwitch.setOn(item.state, animated: true)
         cellIndex = item.id
-        stateLabel.text = item.cellTitle
+        switchStateLabel.text = item.cellTitle
     }
     
     @IBAction private func valueChanged(_ sender: UISwitch) {
         if let cellIndex {
-            delegate?.changeSwitchState(index: cellIndex, switchState: settingsSwitch.isOn)
+            delegate?.changeSwitchState(index: cellIndex, switchState: settingSwitch.isOn)
+            if settingSwitch.isOn {
+                switchStateLabel.text = "ON"
+            } else {
+                switchStateLabel.text = "OFF"
+            }
         }
     }
 }

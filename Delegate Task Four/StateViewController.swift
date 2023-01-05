@@ -12,7 +12,7 @@ class StateViewController: UIViewController {
     //MARK: - Outlets
     
     @IBOutlet weak private var stateTextView: UITextView!
-    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak private var stateLabel: UILabel!
     @IBOutlet weak private var uiStyleSegmentedControl: UISegmentedControl!
     
     //MARK: - Variables
@@ -23,7 +23,7 @@ class StateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for _ in 0...9 {
+        for _ in 0...99 {
             bunchOfSwitchStates.append(false)
         }
     }
@@ -41,9 +41,8 @@ class StateViewController: UIViewController {
             if let secondScreen = segue.destination as? SettingsViewController {
                 secondScreen.delegate = self
                 if let text = stateLabel.text {
-                    let configuration = SettingsViewControllerConfiguration(bunchOfSwiftStates: bunchOfSwitchStates,textForTexfield: text)
+                    let configuration = SettingsViewControllerConfiguration(bunchOfSwiftStates: bunchOfSwitchStates,textForTexfield: text, selectedIndex: uiStyleSegmentedControl.selectedSegmentIndex)
                     secondScreen.configure(with: configuration)
-                    secondScreen.selectedIndex = uiStyleSegmentedControl.selectedSegmentIndex
                 }
             }
         }

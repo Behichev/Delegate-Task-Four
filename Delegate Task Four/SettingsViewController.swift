@@ -30,29 +30,17 @@ class SettingsViewController: UIViewController {
     private var items: [ItemState] = []
     private var cellTitle = ""
     private var cellColor: UIColor = .red
-    var selectedIndex: Int?
     private var myView: SettingsView?
     
     //MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsCollectionView.delegate = self
-        settingsCollectionView.dataSource = self
-        settingsCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
         settingsTextField.delegate = self
-        settingsTableView.delegate = self
-        settingsTableView.dataSource = self
         settingsTextField.text = configuration?.textForTexfield
-        if let selectedIndex {
+        
+        if let selectedIndex = configuration?.selectedIndex {
             setupUI(selectedIndex: selectedIndex)
-        }
-        for item in items {
-            if let myView = UINib.init(nibName: "SettingsView", bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
-                settingsStackView.addArrangedSubview(myView)
-                myView.configure(with: item)
-                myView.delegate = self
-            }
         }
     }
     
@@ -75,12 +63,30 @@ class SettingsViewController: UIViewController {
         superViewForCollection.isHidden = true
         superViewForStackView.isHidden = true
         
-        if selectedIndex == 0 {
+        switch selectedIndex {
+        
+        case 0:
             superViewForTableView.isHidden = false
-        } else if selectedIndex == 1 {
+            settingsTableView.delegate = self
+            settingsTableView.dataSource = self
+        
+        case 1:
             superViewForCollection.isHidden = false
-        } else {
+            settingsCollectionView.delegate = self
+            settingsCollectionView.dataSource = self
+            settingsCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        
+        case 2:
+            for item in items {
+                if let myView = UINib.init(nibName: "SettingsView", bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
+                    settingsStackView.addArrangedSubview(myView)
+                    myView.configure(with: item)
+                    myView.delegate = self
+                }
+            }
             superViewForStackView.isHidden = false
+        default:
+            break
         }
     }
     

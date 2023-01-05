@@ -10,4 +10,5 @@ import Foundation
 struct SettingsViewControllerConfiguration {
     var bunchOfSwiftStates: [Bool]
     var textForTexfield: String
+    var selectedIndex: Int
 }

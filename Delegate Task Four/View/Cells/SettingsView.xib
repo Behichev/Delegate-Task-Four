@@ -39,8 +39,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="settingsSwitch" destination="uUw-4V-PaC" id="O5J-NR-C0s"/>
-                <outlet property="stateLabel" destination="TBA-fr-cr1" id="iNx-at-p3x"/>
+                <outlet property="settingSwitch" destination="uUw-4V-PaC" id="O5J-NR-C0s"/>
+                <outlet property="switchStateLabel" destination="TBA-fr-cr1" id="iNx-at-p3x"/>
             </connections>
             <point key="canvasLocation" x="41.984732824427482" y="298.59154929577466"/>
         </view>

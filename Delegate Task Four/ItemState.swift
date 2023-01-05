@@ -8,8 +8,8 @@
 import UIKit
 
 struct ItemState {
-    var id: Int
+    let id: Int
     var state: Bool
-    var cellTitle: String
-    var cellBackgroundColor: UIColor
+    let cellTitle: String
+    let cellBackgroundColor: UIColor
 }
