@@ -23,7 +23,7 @@ class StateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for _ in 0...15 {
+        for _ in 0...95 {
             bunchOfSwitchStates.append(false)
         }
         setupTextViewContent()

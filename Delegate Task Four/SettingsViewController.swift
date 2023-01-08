@@ -112,9 +112,8 @@ class SettingsViewController: UIViewController {
         case 1:
             settingsCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
         case 2:
-            for subView in settingsStackView.subviews as [UIView] {
-                subView.setNeedsDisplay()
-            }
+            let subRange = settingsStackView.arrangedSubviews[index] as? SettingsView
+            subRange?.configure(with: items[index])
         default:
             break
         }
