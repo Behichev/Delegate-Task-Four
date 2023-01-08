@@ -9,8 +9,12 @@ import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
     
+    //MARK: - Outlets
+    
     @IBOutlet weak private var switchStateLabel: UILabel!
     @IBOutlet weak private var settingSwitch: UISwitch!
+    
+    //MARK: - Variables
     
     var delegate: SwitchStatmentDelegate?
     
@@ -19,6 +23,8 @@ class SettingsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    //MARK: - Functions
     
     func configure(with item: ItemState) {
         settingSwitch.setOn(item.state, animated: true)
@@ -30,15 +36,16 @@ class SettingsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    override func prepareForReuse() {
+        settingSwitch.isOn = false
+        switchStateLabel.text = nil
+    }
+    
+    //MARK: - Actions
+    
     @IBAction private func valueChanged(_ sender: UISwitch) {
         if let cellIndex {
             delegate?.changeSwitchState(index: cellIndex, switchState: settingSwitch.isOn)
-            
-            if settingSwitch.isOn {
-                switchStateLabel.text = "ON"
-            } else {
-                switchStateLabel.text = "OFF"
-            }
         }
     }
 }

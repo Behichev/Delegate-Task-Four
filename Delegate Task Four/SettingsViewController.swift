@@ -40,11 +40,11 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsTextField.delegate = self
-        items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
         if let selectedIndex, let textForTexfield {
             setupUI(selectedIndex: selectedIndex)
             settingsTextField.text = textForTexfield
         }
+        
     }
     
     //MARK: - Functions
@@ -53,15 +53,16 @@ class SettingsViewController: UIViewController {
         firstScreenArrayOfStates = configuration.bunchOfSwiftStates
         selectedIndex = configuration.selectedIndex
         textForTexfield = configuration.textForTexfield
+        items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
     }
     
     private func transformStateArrayToStruct(array: [Bool]) -> [ItemState] {
         
         let transformedArray = array.enumerated().map ({ (index, element) in
             if element {
-                cellTitle = "ON"
+                cellTitle = "On"
             } else {
-                cellTitle = "OFF"
+                cellTitle = "Off"
             }
             return ItemState(id: index, state: element, cellTitle: cellTitle)
         })
@@ -79,24 +80,41 @@ class SettingsViewController: UIViewController {
             superViewForTableView.isHidden = false
             settingsTableView.delegate = self
             settingsTableView.dataSource = self
+            settingsTableView.register(UINib(nibName: AppConstants.Identifieers.Nibs.tableViewCellNib, bundle: nil),
+                                       forCellReuseIdentifier: AppConstants.Identifieers.Cells.tableView)
             
         case 1:
             superViewForCollection.isHidden = false
             settingsCollectionView.dataSource = self
             settingsCollectionView.delegate = self
+            settingsCollectionView.register(UINib(nibName: AppConstants.Identifieers.Nibs.collectionViewCellNib, bundle: nil),
+                                            forCellWithReuseIdentifier: AppConstants.Identifieers.Cells.collectionView)
             settingsCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
             
         case 2:
             superViewForStackView.isHidden = false
             for item in items {
-                if let myView = UINib.init(nibName: "SettingsView", bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
+                if let myView = UINib.init(nibName: AppConstants.Identifieers.Nibs.uiViewNib, bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
                     settingsStackView.addArrangedSubview(myView)
                     myView.configure(with: item)
                     myView.delegate = self
-                    
                 }
             }
-            
+        default:
+            break
+        }
+    }
+    
+    private func updateUI(index: Int) {
+        switch selectedIndex {
+        case 0:
+            settingsTableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
+        case 1:
+            settingsCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        case 2:
+            for subView in settingsStackView.subviews as [UIView] {
+                subView.setNeedsDisplay()
+            }
         default:
             break
         }
@@ -118,7 +136,6 @@ extension SettingsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: AppConstants.Identifieers.Cells.collectionView)
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppConstants.Identifieers.Cells.collectionView, for: indexPath) as? SettingsCollectionViewCell {
             cell.delegate = self
             let item = items[indexPath.item]
@@ -173,7 +190,6 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.register(UINib(nibName: "SettingsTableViewCell", bundle: nil), forCellReuseIdentifier: AppConstants.Identifieers.Cells.tableView)
         if let cell = tableView.dequeueReusableCell(withIdentifier: AppConstants.Identifieers.Cells.tableView, for: indexPath) as? SettingsTableViewCell {
             cell.delegate = self
             let item = items[indexPath.row]
@@ -196,5 +212,6 @@ extension SettingsViewController: SwitchStatmentDelegate {
         firstScreenArrayOfStates[index] = switchState
         items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
         delegate?.switchStateDidChange(state: switchState, index: index)
+        updateUI(index: index)
     }
 }

@@ -27,18 +27,12 @@ class SettingsView: UIView {
         cellIndex = item.id
         switchStateLabel.text = item.cellTitle
     }
-
+    
     //MARK: - Actions
     
     @IBAction private func valueChanged(_ sender: UISwitch) {
         if let cellIndex {
             delegate?.changeSwitchState(index: cellIndex, switchState: settingSwitch.isOn)
-            
-            if settingSwitch.isOn {
-                switchStateLabel.text = "ON"
-            } else {
-                switchStateLabel.text = "OFF"
-            }
         }
     }
 }

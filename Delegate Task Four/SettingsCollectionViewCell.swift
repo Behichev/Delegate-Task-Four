@@ -23,7 +23,7 @@ class SettingsCollectionViewCell: UICollectionViewCell {
     //MARK: - Variables
     
     private var cellIndex: Int?
-
+    
     //MARK: - Functions
     
     func configure(with item: ItemState) {
@@ -31,9 +31,14 @@ class SettingsCollectionViewCell: UICollectionViewCell {
         cellIndex = item.id
         switchStateLabel.text = item.cellTitle
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func prepareForReuse() {
+        settingSwitch.isOn = false
+        switchStateLabel.text = nil
     }
     
     //MARK: - Actions
@@ -41,12 +46,6 @@ class SettingsCollectionViewCell: UICollectionViewCell {
     @IBAction private func valueChanged(_ sender: UISwitch) {
         if let cellIndex {
             delegate?.changeSwitchState(index: cellIndex, switchState: settingSwitch.isOn)
-            
-            if settingSwitch.isOn {
-                switchStateLabel.text = "ON"
-            } else {
-                switchStateLabel.text = "OFF"
-            }
         }
     }
 }

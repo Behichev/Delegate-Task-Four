@@ -34,7 +34,7 @@ class StateViewController: UIViewController {
     private func setupTextViewContent() {
         var textElement = ""
         for (index, element) in bunchOfSwitchStates.enumerated() {
-            let textValue = element ? "ON" : "OFF"
+            let textValue = element ? "On" : "Off"
             textElement += "\(index): \(textValue)\n"
         }
         stateTextView.text = textElement

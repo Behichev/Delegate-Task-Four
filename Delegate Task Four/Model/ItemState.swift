@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemState {
+struct ItemState: Equatable {
     let id: Int
     let state: Bool
     let cellTitle: String

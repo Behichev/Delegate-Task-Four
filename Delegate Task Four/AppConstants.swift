@@ -16,5 +16,10 @@ struct AppConstants {
             static let collectionView = "settingsCollectionViewCell"
             static let tableView = "settingsTableViewCell"
         }
+        struct Nibs {
+            static let tableViewCellNib = "SettingsTableViewCell"
+            static let collectionViewCellNib = "SettingsCollectionViewCell"
+            static let uiViewNib = "SettingsView"
+        }
     }
 }
