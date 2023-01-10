@@ -33,18 +33,16 @@ class SettingsViewController: UIViewController {
     private var cellTitle = ""
     private var myView: SettingsView?
     private var firstScreenArrayOfStates: [Bool] = []
-    private var selectedIndex: Int?
     private var textForTexfield: String?
-    private var cellID: Int?
+    private var cellID: [Int] = []
     
     //MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsTextField.delegate = self
-        selectedIndex = setupSegmentedControl.selectedSegmentIndex
-        if let selectedIndex, let textForTexfield {
-            setupUI(selectedIndex: selectedIndex)
+        setupUI(selectedIndex: setupSegmentedControl.selectedSegmentIndex)
+        if let textForTexfield {
             settingsTextField.text = textForTexfield
         }
         
@@ -116,11 +114,15 @@ class SettingsViewController: UIViewController {
     }
     
     private func updateUI(with index: Int) {
-        switch selectedIndex {
+        
+        switch setupSegmentedControl.selectedSegmentIndex {
+            
         case 0:
             settingsTableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
+            
         case 1:
             settingsCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            
         case 2:
             let subRange = settingsStackView.arrangedSubviews[index] as? SettingsView
             subRange?.configure(with: items[index])
@@ -133,9 +135,9 @@ class SettingsViewController: UIViewController {
     
     @IBAction private func uiStateChanged(_ sender: UISegmentedControl) {
         setupUI(selectedIndex: sender.selectedSegmentIndex)
-        if let cellID {
-            updateUI(with: cellID)
-        }
+            for cell in cellID {
+                updateUI(with: cell)
+            }
     }
     
     @IBAction private func backButtonPressed(_ sender: UIButton) {
@@ -229,6 +231,6 @@ extension SettingsViewController: SwitchStatmentDelegate {
         items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
         delegate?.switchStateDidChange(state: switchState, index: index)
         updateUI(with: index)
-        cellID = index
+        cellID.append(index)
     }
 }
