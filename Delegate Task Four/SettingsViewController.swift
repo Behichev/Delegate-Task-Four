@@ -134,10 +134,29 @@ class SettingsViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction private func uiStateChanged(_ sender: UISegmentedControl) {
-        setupUI(selectedIndex: sender.selectedSegmentIndex)
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
             for cell in cellID {
                 updateUI(with: cell)
             }
+            setupUI(selectedIndex: sender.selectedSegmentIndex)
+        case 1:
+            for cell in cellID {
+                updateUI(with: cell)
+            }
+            setupUI(selectedIndex: sender.selectedSegmentIndex)
+        case 2:
+            setupUI(selectedIndex: sender.selectedSegmentIndex)
+            for cell in cellID {
+                updateUI(with: cell)
+            }
+        default:
+            break
+        }
+        
+        
+            
     }
     
     @IBAction private func backButtonPressed(_ sender: UIButton) {
@@ -230,7 +249,7 @@ extension SettingsViewController: SwitchStatmentDelegate {
         firstScreenArrayOfStates[index] = switchState
         items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
         delegate?.switchStateDidChange(state: switchState, index: index)
-        updateUI(with: index)
+//        updateUI(with: index)
         cellID.append(index)
     }
 }
