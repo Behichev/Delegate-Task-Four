@@ -8,7 +8,7 @@
 import Foundation
 
 struct AppConstants {
-    struct Identifieers {
+    struct Identifiers {
         struct Segues {
             static let segueIdentifier = "goToConfiguration"
         }

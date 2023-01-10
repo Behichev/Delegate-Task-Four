@@ -10,5 +10,4 @@ import Foundation
 struct SettingsViewControllerConfiguration {
     let bunchOfSwiftStates: [Bool]
     let textForTexfield: String
-    let selectedIndex: Int
 }

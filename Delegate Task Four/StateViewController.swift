@@ -13,7 +13,6 @@ class StateViewController: UIViewController {
     
     @IBOutlet weak private var stateTextView: UITextView!
     @IBOutlet weak private var stateLabel: UILabel!
-    @IBOutlet weak private var uiStyleSegmentedControl: UISegmentedControl!
     
     //MARK: - Variables
     
@@ -43,17 +42,17 @@ class StateViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction private func goButtonPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: AppConstants.Identifieers.Segues.segueIdentifier, sender: self)
+        self.performSegue(withIdentifier: AppConstants.Identifiers.Segues.segueIdentifier, sender: self)
     }
     
     //MARK: - Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == AppConstants.Identifieers.Segues.segueIdentifier {
+        if segue.identifier == AppConstants.Identifiers.Segues.segueIdentifier {
             if let secondScreen = segue.destination as? SettingsViewController {
                 secondScreen.delegate = self
                 if let text = stateLabel.text {
-                    let configuration = SettingsViewControllerConfiguration(bunchOfSwiftStates: bunchOfSwitchStates,textForTexfield: text, selectedIndex: uiStyleSegmentedControl.selectedSegmentIndex)
+                    let configuration = SettingsViewControllerConfiguration(bunchOfSwiftStates: bunchOfSwitchStates,textForTexfield: text)
                     secondScreen.configure(with: configuration)
                 }
             }
