@@ -41,7 +41,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsTextField.delegate = self
-        setupUI(selectedIndex: setupSegmentedControl.selectedSegmentIndex)
+        setupUI()
+        setupContent(selectedIndex: setupSegmentedControl.selectedSegmentIndex)
         
         if let textForTexfield {
             settingsTextField.text = textForTexfield
@@ -69,11 +70,7 @@ class SettingsViewController: UIViewController {
         return transformedArray
     }
     
-    private func setupUI(selectedIndex: Int) {
-        superViewForTableView.isHidden = true
-        superViewForCollection.isHidden = true
-        superViewForStackView.isHidden = true
-        
+    private func setupUI() {
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
         settingsTableView.register(UINib(nibName: AppConstants.Identifiers.Nibs.tableViewCellNib, bundle: nil),
@@ -89,10 +86,16 @@ class SettingsViewController: UIViewController {
             if let myView = UINib.init(nibName: AppConstants.Identifiers.Nibs.uiViewNib, bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
                 settingsStackView.addArrangedSubview(myView)
                 myView.configure(with: item)
-                myView.delegate = self
                 myView.backgroundColor = .systemMint
+                myView.delegate = self
             }
         }
+    }
+    
+    private func setupContent(selectedIndex: Int) {
+        superViewForTableView.isHidden = true
+        superViewForCollection.isHidden = true
+        superViewForStackView.isHidden = true
         
         switch selectedIndex {
             
@@ -107,10 +110,10 @@ class SettingsViewController: UIViewController {
             view.backgroundColor = .systemPurple
             
         case 2:
+            
             superViewForStackView.isHidden = false
             settingsStackView.backgroundColor = .systemMint
             view.backgroundColor = .systemMint
-            
         default:
             break
         }
@@ -144,7 +147,7 @@ class SettingsViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction private func uiStateChanged(_ sender: UISegmentedControl) {
-        setupUI(selectedIndex: sender.selectedSegmentIndex)
+        setupContent(selectedIndex: sender.selectedSegmentIndex)
         
         for cellState in cellsState {
             updateUI(with: cellState)
