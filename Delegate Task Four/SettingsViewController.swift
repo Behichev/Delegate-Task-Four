@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController {
     private var myView: SettingsView?
     private var firstScreenArrayOfStates: [Bool] = []
     private var textForTexfield: String?
-    private var cellID: [Int] = []
+    private var cellsState: [Int] = []
     
     //MARK: - ViewController Lifecycle
     
@@ -42,10 +42,10 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         settingsTextField.delegate = self
         setupUI(selectedIndex: setupSegmentedControl.selectedSegmentIndex)
+        
         if let textForTexfield {
             settingsTextField.text = textForTexfield
         }
-        
     }
     
     //MARK: - Functions
@@ -84,7 +84,7 @@ class SettingsViewController: UIViewController {
                                        forCellReuseIdentifier: AppConstants.Identifiers.Cells.tableView)
             settingsTableView.backgroundColor = .systemOrange
             view.backgroundColor = .systemOrange
-            
+ 
         case 1:
             superViewForCollection.isHidden = false
             settingsCollectionView.dataSource = self
@@ -115,17 +115,24 @@ class SettingsViewController: UIViewController {
     
     private func updateUI(with index: Int) {
         
-        switch setupSegmentedControl.selectedSegmentIndex {
+        let selectedIndex = setupSegmentedControl.selectedSegmentIndex
+        
+        switch  selectedIndex {
             
         case 0:
-            settingsTableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
-            
-        case 1:
             settingsCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
-            
-        case 2:
             let subRange = settingsStackView.arrangedSubviews[index] as? SettingsView
             subRange?.configure(with: items[index])
+            
+        case 1:
+            settingsTableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
+            let subRange = settingsStackView.arrangedSubviews[index] as? SettingsView
+            subRange?.configure(with: items[index])
+            
+        case 2:
+            settingsTableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
+            settingsCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            
         default:
             break
         }
@@ -134,29 +141,11 @@ class SettingsViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction private func uiStateChanged(_ sender: UISegmentedControl) {
+        setupUI(selectedIndex: sender.selectedSegmentIndex)
         
-        switch sender.selectedSegmentIndex {
-        case 0:
-            for cell in cellID {
-                updateUI(with: cell)
-            }
-            setupUI(selectedIndex: sender.selectedSegmentIndex)
-        case 1:
-            for cell in cellID {
-                updateUI(with: cell)
-            }
-            setupUI(selectedIndex: sender.selectedSegmentIndex)
-        case 2:
-            setupUI(selectedIndex: sender.selectedSegmentIndex)
-            for cell in cellID {
-                updateUI(with: cell)
-            }
-        default:
-            break
+        for cellState in cellsState {
+            updateUI(with: cellState)
         }
-        
-        
-            
     }
     
     @IBAction private func backButtonPressed(_ sender: UIButton) {
@@ -249,7 +238,7 @@ extension SettingsViewController: SwitchStatmentDelegate {
         firstScreenArrayOfStates[index] = switchState
         items = transformStateArrayToStruct(array: firstScreenArrayOfStates)
         delegate?.switchStateDidChange(state: switchState, index: index)
-//        updateUI(with: index)
-        cellID.append(index)
+        updateUI(with: index)
+        cellsState.append(index)
     }
 }
