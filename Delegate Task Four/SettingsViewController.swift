@@ -74,40 +74,43 @@ class SettingsViewController: UIViewController {
         superViewForCollection.isHidden = true
         superViewForStackView.isHidden = true
         
+        settingsTableView.delegate = self
+        settingsTableView.dataSource = self
+        settingsTableView.register(UINib(nibName: AppConstants.Identifiers.Nibs.tableViewCellNib, bundle: nil),
+                                   forCellReuseIdentifier: AppConstants.Identifiers.Cells.tableView)
+        
+        settingsCollectionView.dataSource = self
+        settingsCollectionView.delegate = self
+        settingsCollectionView.register(UINib(nibName: AppConstants.Identifiers.Nibs.collectionViewCellNib, bundle: nil),
+                                        forCellWithReuseIdentifier: AppConstants.Identifiers.Cells.collectionView)
+        settingsCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        
+        for item in items {
+            if let myView = UINib.init(nibName: AppConstants.Identifiers.Nibs.uiViewNib, bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
+                settingsStackView.addArrangedSubview(myView)
+                myView.configure(with: item)
+                myView.delegate = self
+                myView.backgroundColor = .systemMint
+            }
+        }
+        
         switch selectedIndex {
             
         case 0:
             superViewForTableView.isHidden = false
-            settingsTableView.delegate = self
-            settingsTableView.dataSource = self
-            settingsTableView.register(UINib(nibName: AppConstants.Identifiers.Nibs.tableViewCellNib, bundle: nil),
-                                       forCellReuseIdentifier: AppConstants.Identifiers.Cells.tableView)
             settingsTableView.backgroundColor = .systemOrange
             view.backgroundColor = .systemOrange
- 
+            
         case 1:
             superViewForCollection.isHidden = false
-            settingsCollectionView.dataSource = self
-            settingsCollectionView.delegate = self
-            settingsCollectionView.register(UINib(nibName: AppConstants.Identifiers.Nibs.collectionViewCellNib, bundle: nil),
-                                            forCellWithReuseIdentifier: AppConstants.Identifiers.Cells.collectionView)
-            settingsCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
             settingsCollectionView.backgroundColor = .systemPurple
             view.backgroundColor = .systemPurple
             
         case 2:
             superViewForStackView.isHidden = false
+            settingsStackView.backgroundColor = .systemMint
             view.backgroundColor = .systemMint
-            superViewForStackView.backgroundColor = .systemMint
             
-            for item in items {
-                if let myView = UINib.init(nibName: AppConstants.Identifiers.Nibs.uiViewNib, bundle: nil).instantiate(withOwner: self)[0] as? SettingsView {
-                    settingsStackView.addArrangedSubview(myView)
-                    myView.configure(with: item)
-                    myView.delegate = self
-                    myView.backgroundColor = .systemMint
-                }
-            }
         default:
             break
         }
